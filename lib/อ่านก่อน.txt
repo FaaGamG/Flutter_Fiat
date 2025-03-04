@@ -1,0 +1,2 @@
+เช็ค packet ที่file pubspec.yaml
+ติดตั้งลงโทรศัพท์ - flutter build apk
