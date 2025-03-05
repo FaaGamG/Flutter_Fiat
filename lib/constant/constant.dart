@@ -9,7 +9,7 @@ const sColor = Color.fromARGB(255, 40, 226, 30);
 //กำหนดขนาด fontsize
 
 const pFont = 30.0;
-const ApiFont = 15.0;
+const ApiFont = 30.0;
 
 //APi
 

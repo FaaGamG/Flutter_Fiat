@@ -12,6 +12,7 @@ import 'package:finalmobile/screen/profile.dart';
 import 'package:finalmobile/screen/register.dart';
 import 'package:finalmobile/screen/registerfirebase.dart';
 import 'package:finalmobile/screen/showiot.dart';
+import 'package:finalmobile/screen/start.dart';
 import 'package:finalmobile/screen/update.dart';
 import 'package:finalmobile/screen/videoyoutube.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,7 +32,7 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       //เชื่อมกับ function home ที่ floder screen  =>>file home.dart
-      home: Home(),
+      home: start(),
       theme: ThemeData(
         primaryColor: pColor,
         secondaryHeaderColor: sColor,
@@ -51,6 +52,7 @@ class Myapp extends StatelessWidget {
       'firebaselogin':(context)=>Firebaselogin(),
       'addrealtime':(context)=> Addrealtime(),
       'showiot':(context)=> Showiot(),
+      'home':(context)=>Dashboard(),
       //'login' :(context) => login(),
     },
     

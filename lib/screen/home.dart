@@ -12,10 +12,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 92, 99, 236),
       appBar: AppBar(
-        backgroundColor: pColor,
+        backgroundColor: Colors.blue,
         title: Text(
-          "Teerakarn hasuk",
+          "Teerakarn - Jirapat",
           style: TextStyle(
             //เรียกผ่านตัวแปร file constant.dart
             fontSize: pFont,
@@ -28,9 +29,9 @@ class _HomeState extends State<Home> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            btnApi(),
-            SizedBox(height: 20,),
-            btnCamera(),
+            // btnApi(),
+            // SizedBox(height: 20,),
+            // btnCamera(),
             SizedBox(height: 20,),
             btndog(),
             SizedBox(height: 20,),
