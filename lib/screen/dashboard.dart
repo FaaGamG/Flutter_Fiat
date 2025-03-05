@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -11,14 +12,19 @@ class _DashboardState extends State<Dashboard> {
   final List<String> _images = [
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN1E8b5tY_3ej5HoA2OF2ju9P6Lr2KT9UYrA&s', // Example Image URL 1
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIv19VqfxZllm1DJUsCtfw10OszT6CcwIbpg&s', // Example Image URL 2
-    'https://www.inet.co.th/static/images/mMTutIRhWimfLgZ.jpg', // Example Image URL 3
+    'https://www.surin.rmuti.ac.th/th/th63/slider/A89.jpg', // Example Image URL 3
   ];
 
   int _currentIndex = 0;
 
-  void _nextImage() {
-    setState(() {
-      _currentIndex = (_currentIndex + 1) % _images.length;
+  @override
+  void initState() {
+    super.initState();
+    // Set up a timer to change the image every 3 seconds
+    Timer.periodic(const Duration(seconds: 3), (timer) {
+      setState(() {
+        _currentIndex = (_currentIndex + 1) % _images.length;
+      });
     });
   }
 
@@ -27,7 +33,7 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Dashboard",
+          "ข้อมูล IoT",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -60,7 +66,7 @@ class _DashboardState extends State<Dashboard> {
                 color: Colors.blueAccent,
               ),
               child: Text(
-                'Menu',
+                'เมนู',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,
@@ -70,20 +76,20 @@ class _DashboardState extends State<Dashboard> {
             ),
             ListTile(
               leading: const Icon(Icons.home, color: Colors.blueAccent),
-              title: const Text("Home", style: TextStyle(fontSize: 18)),
+              title: const Text("หน้าหลัก", style: TextStyle(fontSize: 18)),
               onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.account_circle_sharp,
                   color: Colors.blueAccent),
-              title: const Text("Profile", style: TextStyle(fontSize: 18)),
+              title: const Text("โปรไฟล์", style: TextStyle(fontSize: 18)),
               onTap: () {
                 Navigator.pushNamed(context, 'profile1');
               },
             ),
             ListTile(
               leading: const Icon(Icons.add_location, color: Colors.blueAccent),
-              title: const Text("Create", style: TextStyle(fontSize: 18)),
+              title: const Text("สร้าง", style: TextStyle(fontSize: 18)),
               onTap: () {
                 Navigator.pushNamed(context, 'createpage');
               },
@@ -91,7 +97,7 @@ class _DashboardState extends State<Dashboard> {
             ListTile(
               leading:
                   const Icon(Icons.access_time_sharp, color: Colors.blueAccent),
-              title: const Text("Update", style: TextStyle(fontSize: 18)),
+              title: const Text("อัปเดต", style: TextStyle(fontSize: 18)),
               onTap: () {
                 Navigator.pushNamed(context, 'update');
               },
@@ -99,13 +105,13 @@ class _DashboardState extends State<Dashboard> {
             ListTile(
               leading: const Icon(Icons.add_shopping_cart_rounded,
                   color: Colors.blueAccent),
-              title: const Text("Shop", style: TextStyle(fontSize: 18)),
+              title: const Text("ร้านค้า", style: TextStyle(fontSize: 18)),
               onTap: () {},
             ),
             ListTile(
               leading:
                   const Icon(Icons.airplay_outlined, color: Colors.blueAccent),
-              title: const Text("Video", style: TextStyle(fontSize: 18)),
+              title: const Text("วิดีโอ", style: TextStyle(fontSize: 18)),
               onTap: () {
                 Navigator.pushNamed(context, 'videoyoutube');
               },
@@ -113,14 +119,15 @@ class _DashboardState extends State<Dashboard> {
             ListTile(
               leading: const Icon(Icons.account_balance_wallet_rounded,
                   color: Colors.blueAccent),
-              title: const Text("Realtime", style: TextStyle(fontSize: 18)),
+              title:
+                  const Text("ข้อมูลเรียลไทม์", style: TextStyle(fontSize: 18)),
               onTap: () {
                 Navigator.pushNamed(context, 'addrealtime');
               },
             ),
             ListTile(
               leading: const Icon(Icons.aod_outlined, color: Colors.blueAccent),
-              title: const Text("Show IoT", style: TextStyle(fontSize: 18)),
+              title: const Text("แสดง IoT", style: TextStyle(fontSize: 18)),
               onTap: () {
                 Navigator.pushNamed(context, 'showiot');
               },
@@ -129,153 +136,106 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       body: SingleChildScrollView(
-        // Enables scrolling
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Carousel for changing images
-              SizedBox(
-                height: 200,
+              // Title and introductory text
+              Container(
                 width: double.infinity,
-                child: GestureDetector(
-                  onTap: _nextImage, // Change image when tapped
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      _images[_currentIndex],
-                      fit: BoxFit.cover,
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.blueAccent, Colors.purpleAccent],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    const Text(
+                      'มาเรียนรู้เกี่ยวกับ IoT กันเถอะ!',
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'IoT (Internet of Things) คือ การเชื่อมต่อของอุปกรณ์ต่างๆ ผ่านอินเทอร์เน็ต',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Image carousel that changes every 3 seconds
+              Container(
+                height: 250,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(
+                    _images[_currentIndex],
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
               const SizedBox(height: 20),
 
-              // Welcome Text
-              Container(
-                padding: const EdgeInsets.all(16.0),
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.blueAccent.shade100,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 3,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: const [
-                    Text(
-                      "Welcome to the Rajamangala University of Technology Isan SURIN Campus.",
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Here you can monitor your activities, manage settings, and explore the app features.",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-
-              // News Section
-              const SizedBox(height: 20),
+              // Information about IoT
               const Text(
-                "Latest News",
+                'เทคโนโลยีที่เกี่ยวข้องกับ IoT:',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
                 ),
               ),
               const SizedBox(height: 10),
-              Container(
-                padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 3,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Big Tech Innovations Coming Soon!",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "Stay tuned for upcoming features and tech innovations that are about to launch in the coming months. Our team is constantly working to enhance your experience.",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: const [
-                        Icon(Icons.access_time, color: Colors.grey, size: 16),
-                        SizedBox(width: 5),
-                        Text("Updated 2 days ago"),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // Card for Statistics Overview
               Card(
-                elevation: 5,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+                color: Colors.blue[50],
                 child: ListTile(
-                  leading: const Icon(
-                    Icons.insert_chart,
-                    color: Colors.blueAccent,
-                    size: 40,
-                  ),
                   title: const Text(
-                    "Statistics Overview",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    'เซ็นเซอร์และแอคทูเอเตอร์ (Sensors & Actuators)',
+                    style: TextStyle(fontSize: 18),
                   ),
-                  subtitle:
-                      const Text("Get a quick glance at your performance."),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.blueAccent,
+                  subtitle: const Text(
+                    'เซ็นเซอร์ใช้ในการตรวจจับข้อมูลจากโลกภายนอก เช่น อุณหภูมิ, ความชื้น, หรือการเคลื่อนไหว และแอคทูเอเตอร์ใช้ในการตอบสนองการกระทำที่เกิดขึ้น',
+                    style: TextStyle(fontSize: 14),
                   ),
-                  onTap: () {
-                    // Navigate to stats page
-                  },
                 ),
               ),
+              const SizedBox(height: 10),
+              Card(
+                color: Colors.blue[50],
+                child: ListTile(
+                  title: const Text(
+                    'การเชื่อมต่อและเครือข่าย (Connectivity & Networks)',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  subtitle: const Text(
+                    'การเชื่อมต่อใน IoT จะใช้เทคโนโลยีต่างๆ เช่น Wi-Fi, Bluetooth, LoRa, Zigbee เพื่อให้สามารถแลกเปลี่ยนข้อมูลระหว่างอุปกรณ์ต่างๆ ได้',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
