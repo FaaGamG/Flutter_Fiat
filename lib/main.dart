@@ -1,30 +1,30 @@
-import 'package:finalmobile/constant/constant.dart';
 import 'package:finalmobile/firebase_options.dart';
-import 'package:finalmobile/screen/addrealtime.dart';
-import 'package:finalmobile/screen/async.dart';
-import 'package:finalmobile/screen/create.dart';
-import 'package:finalmobile/screen/dashboard.dart';
-import 'package:finalmobile/screen/dogapi.dart';
-import 'package:finalmobile/screen/firebaselogin.dart';
-import 'package:finalmobile/screen/home.dart';
-import 'package:finalmobile/screen/login.dart';
-import 'package:finalmobile/screen/profile.dart';
-import 'package:finalmobile/screen/register.dart';
-import 'package:finalmobile/screen/registerfirebase.dart';
-import 'package:finalmobile/screen/showiot.dart';
-import 'package:finalmobile/screen/start.dart';
-import 'package:finalmobile/screen/update.dart';
-import 'package:finalmobile/screen/videoyoutube.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-Future<void> main() async{
+import 'constant/constant.dart';
+import 'screen/addrealtime.dart';
+import 'screen/async.dart';
+import 'screen/create.dart';
+import 'screen/dashboard.dart';
+import 'screen/dogapi.dart';
+import 'screen/firebaselogin.dart';
+import 'screen/profile.dart';
+import 'screen/register.dart';
+import 'screen/registerfirebase.dart';
+import 'screen/showiot.dart';
+import 'screen/start.dart';
+import 'screen/update.dart';
+import 'screen/videoyoutube.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(Myapp());
 }
+
 class Myapp extends StatelessWidget {
   const Myapp({super.key});
 
@@ -38,24 +38,23 @@ class Myapp extends StatelessWidget {
         secondaryHeaderColor: sColor,
       ),
       //สร้างroutes
-    routes: {
-      'async': (context) => APIAsync(),
-      'dogapi': (context) => dogapi(),
-      'login' :(context) => Dashboard(),
-      'dashboard':(context) => Dashboard(),
-      'registor':(context)=> Register(),
-      'profile1':(context)=> profile(),
-      'createpage':(context)=> create(),
-      'update':(context) => UP(),
-      'registerfirebase':(context) => Registerfirebase(),
-      'videoyoutube':(context)=> Videoyoutube(),
-      'firebaselogin':(context)=>Firebaselogin(),
-      'addrealtime':(context)=> Addrealtime(),
-      'showiot':(context)=> Showiot(),
-      'home':(context)=>Dashboard(),
-      //'login' :(context) => login(),
-    },
-    
+      routes: {
+        'async': (context) => APIAsync(),
+        'dogapi': (context) => dogapi(),
+        'login': (context) => Dashboard(),
+        'dashboard': (context) => Dashboard(),
+        'registor': (context) => Register(),
+        'profile1': (context) => profile(),
+        'createpage': (context) => create(),
+        'update': (context) => UP(),
+        'registerfirebase': (context) => Registerfirebase(),
+        'videoyoutube': (context) => Videoyoutube(),
+        'firebaselogin': (context) => Firebaselogin(),
+        'addrealtime': (context) => Addrealtime(),
+        'showiot': (context) => Showiot(),
+        'home': (context) => Dashboard(),
+        //'login' :(context) => login(),
+      },
     );
   }
 }
